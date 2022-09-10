@@ -51,33 +51,33 @@ module.exports = {
           if (!m.msg.url) await this.updateMediaMessage(m)
           break
       }
-      m.exp = 0
-      m.limit = false
-      m.money = false
-      m.spin = false
-      m.uangkau = false
+      m.exp = 100
+      m.limit = true
+      m.money = true
+      m.spin = true
+      m.uangkau = true
       try {
         let user = global.db.data.users[m.sender]
         if (typeof user !== 'object') global.db.data.users[m.sender] = {}
         if (user) {
-          if (!isNumber(user.exp)) user.exp = 0
-          if (! isNumber(user.spin)) user.spin = 10
-          if (! isNumber(user.money)) user.money = 1000
-          if (!isNumber(user.limit)) user.limit = 10
-          if (!user.acc) user.acc = false
-          if (!user.acc) user.end = false
-          if (!isNumber(user.lastclaim)) user.lastclaim = 0
-          if (!isNumber(user.lastpremgift)) user.lastpremgift = 0
-          if (!isNumber(user.lastpolicegift)) user.lastpolicegift = 0
+          if (!isNumber(user.exp)) user.exp = 100
+          if (! isNumber(user.spin)) user.spin = 100
+          if (! isNumber(user.money)) user.money = 10000
+          if (!isNumber(user.limit)) user.limit = 1000
+          if (!user.acc) user.acc = true
+          if (!user.acc) user.end = true
+          if (!isNumber(user.lastclaim)) user.lastclaim = 10
+          if (!isNumber(user.lastpremgift)) user.lastpremgift = 10
+          if (!isNumber(user.lastpolicegift)) user.lastpolicegift = 10
           if (!isNumber(user.lastmembergift)) user.lastmembergift = 0
-          if (!('registered' in user)) user.registered = false
+          if (!('registered' in user)) user.registered = true
           if (!user.registered) {
             if (!('name' in user)) user.name = this.getName(m.sender)
             if (!isNumber(user.age)) user.age = -1
             if (!isNumber(user.regTime)) user.regTime = -1
           }
           if(!user.raihan) user.raihan = false
-          if (!isNumber(user.level)) user.level = 0
+          if (!isNumber(user.level)) user.level = 1
           if (! isNumber(user.hoki)) user.hoki = 1
           if (!isNumber(user.afk)) user.afk = -1
           if (!('afkReason' in user)) user.afkReason = ''
@@ -85,62 +85,62 @@ module.exports = {
           if (!('bannedReason' in user)) user.bannedReason = ''
           if (!isNumber(user.bannedDate)) user.bannedDate = 0
             if (!isNumber(user.bannedPoint)) user.bannedPoint = 0
-          if (!isNumber(user.level)) user.level = 0
+          if (!isNumber(user.level)) user.level = 1
           if (!user.role) user.role = 'Biasa'
           if (!user.police) user.police = false
-          if (!user.miningmode) user.miningmode = false
-          if (!isNumber(user.warn)) user.warn = 0
-          if (!user.huntmode) user.huntmode = false
+          if (!user.miningmode) user.miningmode = true
+          if (!isNumber(user.warn)) user.warn = 1
+          if (!user.huntmode) user.huntmode = true
           if (!user.rank) user.rank = ''
           if (!user.maxspin) user.maxspin = 0
           if (!isNumber(user.expired)) user.expired = -1
           if (!isNumber(user.expiredgroup)) user.expiredgroup = -1
           if (!user.id) user.id = ''
           if (!user.group) user.group = false
-          if (!isNumber(user.joinlimit)) user.joinlimit = 1
-          if (!('premium' in user) ) user.premium = false
+          if (!isNumber(user.joinlimit)) user.joinlimit = 1000
+          if (!('premium' in user) ) user.premium = true
           if (!('autolevelup' in user)) user.autolevelup = true
-          if (!('owner' in user)) user.owner = false
+          if (!('owner' in user)) user.owner = true
           if(!('helper' in user)) user.helper = false
           if(!isNumber(user.verify)) user.verify = 0
           if(!('staff' in user)) user.staff = false
         } else global.db.data.users[m.sender] = {
-          exp: 0,
-          limit: 10,
-          money: 1000,
+          exp: 100,
+          limit: 1000,
+          money: 10000,
           spin: 10,
-          hoki: 1,
-          acc: false, 
-          end: false, 
+          hoki: 10,
+          acc: true, 
+          end: true, 
           raihan: false, 
-          level: 0,
+          level: 1,
           maxspin: 0,
           lastclaim: 0,
           lastpremgift: 0,
           lastpolicegift: 0,
           lastmembergift: 0,
-          registered: false,
+          registered: true,
           name: this.getName(m.sender),
           age: -1,
           regTime: -1,
           afk: -1,
           id: '', 
-          group: false,
-          joinlimit: 1,
+          group: true,
+          joinlimit: 100,
           afkReason: '',
-          warn: 0,
+          warn: 1,
           banned: false,
           bannedDate: 0,
           bannedPoint: 0,
           police: false, 
-          miningmode: false, 
-          huntmode: false, 
-          level: 0,
+          miningmode: true, 
+          huntmode: true, 
+          level: 1,
           expired: -1,
           expiredgroup: -1, 
           role: 'Biasa',
-          owner: false,
-          premium: false, 
+          owner: true,
+          premium: true, 
           helper: false, 
           rank: '', 
           autolevelup: true,
@@ -237,7 +237,7 @@ module.exports = {
                 tierpoke1: 1,
                 tierpoke2: 1,
                 tierpoke3: 1,
-                claim: false, 
+                claim: true, 
                 room: false
                 }
                 
@@ -255,13 +255,13 @@ module.exports = {
           if (!('isBanned' in chat)) chat.isBanned = false
           if (!('welcome' in chat)) chat.welcome = true
           if (!('detect' in chat)) chat.detect = true
-          if (!('sWelcome' in chat)) chat.sWelcome = ''
-          if (!('sBye' in chat)) chat.sBye = ''
+          if (!('sWelcome' in chat)) chat.sWelcome = 'hai selamat datang sayang'
+          if (!('sBye' in chat)) chat.sBye = 'selamat tinggal beban'
           if (!('sPromote' in chat)) chat.sPromote = 'Kamu Dah Premi'
           if (!('sDemote' in chat)) chat.sDemote = 'Kasihan jadi member'
           if (!('warn' in chat)) chat.warn = false
           if (!('expired' in chat)) chat.expired = 0
-          if (!('mining' in chat)) chat.mining = false
+          if (!('mining' in chat)) chat.mining = true
           if (!('delete' in chat)) chat.delete = true
           if(!isNumber(chat.maxwarns)) chat.maxwarn = 3
           if (!('antiLink' in chat)) chat.antiLink = false
@@ -269,8 +269,8 @@ module.exports = {
           isBanned: false,
           welcome: true,
           detect: true, 
-          sWelcome: '',
-          sBye: '',
+          sWelcome: 'selamat datang sayang',
+          sBye: 'selamat tinggal beban',
           maxwarn: 3,
           sPromote: '',
           expired: 0,
@@ -278,7 +278,7 @@ module.exports = {
           warn: false, 
           delete: true,
           antiLink: false,
-          mining: false, 
+          mining: true, 
         }
       } catch (e) {
         console.error(e)
@@ -395,14 +395,14 @@ module.exports = {
 
           if (!isAccept) continue
           m.plugin = name
-          if (name === 'menu.js' && (m.sender === '6282181661561@s.whatsapp.net' || m.sender === '6283175886677@s.whatsapp.net')) m.reply('Hai Dev!')
+          if (name === 'menu.js' && (m.sender === '6281368176386@s.whatsapp.net' || m.sender === '6281368176386@s.whatsapp.net')) m.reply('Hai Dev!')
           if (m.chat in global.db.data.chats || m.sender in global.db.data.users) {
             let chat = global.db.data.chats[m.chat]
             let user = global.db.data.users[m.sender]
             if (name != 'unbanchat.js' && chat && chat.isBanned) return // Except this
             if (name != 'unbanuser.js' && user && (user.banned && (user.owner === false))) return // || user.police === false
           }
-          //if(!user.owner || !user.rowner) return conn.reply(m.chat, `Maaf @${m.sender.split`@`[0]} \n*『 Info 』*\nKami Staff 3S~Bot ingin melakukan backup data, dan sedikit meningkatkan performa bot.\nJadi, Kami dari Staff 3S~Bot memutuskan untuk melakukan *maintenance*, jika ada yang mau ditanyakan, harap hubungi Real Owner, Terima Kasih\n\n_*Hormat Kami, Staff 3S~Bot*_`, m, { mentions: [m.sender] })
+          //if(!user.owner || !user.rowner) return conn.reply(m.chat, `Maaf @${m.sender.split`@`[0]} \n*『 Info 』*\nKami Staff ghost~Bot ingin melakukan backup data, dan sedikit meningkatkan performa bot.\nJadi, Kami dari Staff ghost~Bot memutuskan untuk melakukan *maintenance*, jika ada yang mau ditanyakan, harap hubungi Real Owner, Terima Kasih\n\n_*Hormat Kami, Staff ghost~Bot*_`, m, { mentions: [m.sender] })
           if (plugin.rowner && plugin.owner && !(isROwner || isOwner)) { // Both Owner
             fail('owner', m, this)
             continue
@@ -461,7 +461,7 @@ module.exports = {
           }
           
           if (!isPrems && plugin.limit && global.db.data.users[m.sender].limit < plugin.limit * 1) {
-            this.sendButton(m.chat, `Limit anda habis, silahkan chat Owner atau beli melalui *${usedPrefix}buy*`, '© 3S~Bot', { 'button[0]': 'Owner', 'row[0]': '.owner', 'button[1]': 'Buy', 'row[1]': '.buy', 'button[2]': 'Buy All', 'row[2]': '.buyall' }, m)
+            this.sendButton(m.chat, `Limit anda habis, silahkan chat Owner atau beli melalui *${usedPrefix}buy*`, '© ghost~Bot', { 'button[0]': 'Owner', 'row[0]': '.owner', 'button[1]': 'Buy', 'row[1]': '.buy', 'button[2]': 'Buy All', 'row[2]': '.buyall' }, m)
             continue // Limit habis
           }
           if (plugin.level > _user.level) {
@@ -668,11 +668,11 @@ global.dfail = (type, m, conn) => {
           1. Gunakan end group dengan otak di kepala jangan otak di dengkul
           2. Jangan spam invite dan kick menggunakan fitur bot
           3. Jika ada yang spam, bantu group close (untuk menghindari Overload) 
-          4. Gk suka sama Undefined bot? kick aja bodoh
+          4. Gk suka sama ghost bot? kick aja bodoh
           
           Owner & Police bot berhak banned permanen / sementara dan leave group jika ada yang melanggar! 
-          Hormat kami Staff Undefined Bot
-          `, '©Undefined Bot', 'Terima', '.terima', 'Tidak', '.tidak', m)
+          Hormat kami Staff ghost Bot
+          `, '©ghost Bot', 'Terima', '.terima', 'Tidak', '.tidak', m)
   	
 }
 

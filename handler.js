@@ -99,7 +99,7 @@ module.exports = {
           if (!user.group) user.group = false
           if (!isNumber(user.joinlimit)) user.joinlimit = 1000
           if (!('premium' in user) ) user.premium = true
-          if (!('autolevelup' in user)) user.autolevelup = true
+          if (!('autolevelup' in user)) user.autolevelup = false
           if (!('owner' in user)) user.owner = true
           if(!('helper' in user)) user.helper = false
           if(!isNumber(user.verify)) user.verify = 0
@@ -143,7 +143,7 @@ module.exports = {
           premium: true, 
           helper: false, 
           rank: '', 
-          autolevelup: true,
+          autolevelup: false,
           verify: 0,
           staff: false, 
           mt: false,
